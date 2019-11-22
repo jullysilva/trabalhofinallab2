@@ -1,0 +1,11 @@
+
+ATP Produtos Químicos;Tecnologia;5;Graduação;2500.0
+TWeb Sistemas;Administração;3;Mestrado;4000.0
+PMod Tubulações;Engenharia;1;Graduação;3500.0
+ATP Produtos Químicos;Meio Ambiente;1;Doutorado;7000.0
+Gustavo e Kevin Entulhos Ltda;Administração;3;Pós-Graduação;5800.0
+RCED e Salgados;Tecnologia;5;Graduação;1530.0
+JEP Telecomunicações Ltda;Meio Ambiente;3;Graduação;2100.0
+NA Transportes;Engenharia;6;Pós-Graduação;8500.0
+ReA Construções Ltda;Ciências Sociais e Humanas;2;Graduação;1180.0
+InovaBH;engenharia;2;graduacao;2580.0
