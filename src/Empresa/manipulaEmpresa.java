@@ -6,7 +6,6 @@ import arquivo.ArquivoTextoLeitura;
 public class manipulaEmpresa {
 	private ArquivoTextoLeitura leitorArquivo;
 	private ArquivoTextoEscrita escritorArquivo;
-	private RelatorioEmpresa relatorio;
 	private String arquivo;
 	private Lista lista = new Lista();
 
@@ -48,14 +47,6 @@ public class manipulaEmpresa {
 		this.lista = lista;
 	}
 
-	public RelatorioEmpresa getRelatorio() {
-		return relatorio;
-	}
-
-	public void setRelatorio(RelatorioEmpresa relatorio) {
-		this.relatorio = relatorio;
-	}
-
 	public void carregaDadosArquivo() {
 		String[] informacoes = new String[5];
 		Empresa empresa;
@@ -67,10 +58,10 @@ public class manipulaEmpresa {
 			informacoes = linhaArquivo.split(";");
 			empresa = new Empresa(informacoes[0], informacoes[1], Integer.parseInt(informacoes[2]), informacoes[3],	Float.parseFloat(informacoes[4]));
 			
-			System.out.print(empresa + "\n");
 				populaLista(empresa);
 			}
 		}
+		getLista().gestorDados();
 	}
 	
 	public void armazenaDadosArquivo(String nomeEmp) {
@@ -87,6 +78,7 @@ public class manipulaEmpresa {
 		escritorArquivo.abrirArquivo(getArquivo());
 		escritorArquivo.escrever(getLista().listarDados());
 		escritorArquivo.fecharArquivo();
+		getLista().gestorDados();
 	}
 	
 	private void populaLista(Empresa empresa) {

@@ -7,6 +7,7 @@ import arquivo.ArquivoTextoEscrita;
 import arquivo.ArquivoTextoLeitura;
 import candidato.*;
 import Empresa.*;
+import arquivoVagas.*;
 
 public class Aplicacao {
 	public static void main(String[] args) throws Exception {
@@ -14,13 +15,13 @@ public class Aplicacao {
 		int identidade = 0;
 		String nomeEmpresa;
 		boolean mostraMenu = true;
-		//String[] categorias = new String[5];
 		
 		String[] C = new String[7];
 		String[] E = new String[5];
 		String lixo;
 		Candidato candidato;
 		Empresa empresa;
+		manipulaVagas vagas = null;
 		Scanner leitor = new Scanner(System.in);
 		ArquivoTextoLeitura leitorArquivo = new ArquivoTextoLeitura();
 		ArquivoTextoEscrita escritorArquivo = new ArquivoTextoEscrita();
@@ -358,6 +359,7 @@ public class Aplicacao {
 							System.out.print("Número de vagas: ");
 							do {
 								E[2] = String.valueOf(leitor.nextInt());
+								lixo = leitor.nextLine();
 								if (Integer.parseInt(E[2]) < 0)
 									System.out.print("\tInformação inválida. Informe novamente a quantidade de vagas: ");
 							} while (Integer.parseInt(E[2]) < 0);
@@ -505,20 +507,66 @@ public class Aplicacao {
 				break;
 /*-----------------------------------------------------------------------------------------------------------------------------------------------------------------*/	
 			case 3:
-				
 				System.out.print("\t\t****** PESQUISA DE VAGA *******\nInforme área de atuação: ");
 				String oportunidade = leitor.nextLine();
 				System.out.print("Informe a escolaridade máxima exigidada: ");
 				String escolaridade = leitor.nextLine();
-				
+				System.out.print("\n" + manipuladorE.getLista().localizaVagas(oportunidade, escolaridade).toString());
 				break;
 /*-----------------------------------------------------------------------------------------------------------------------------------------------------------------*/					
 			case 4:
-				
+				System.out.print("\t\t****** CANDIDATOS POR EMPRESA *******\nInforme o nome da empresa: ");
+				nomeEmpresa = leitor.nextLine();
+				if(manipuladorE.getLista().localizar(nomeEmpresa) != null)
+				 empresa = manipuladorE.getLista().localizar(nomeEmpresa);
+				System.out.print("Informe a escolaridade máxima exigidada: ");
+				String escolaridade = leitor.nextLine();
+				 manipuladorE.getLista().localizaVagas(oportunidade, escolaridade).toString());
 				break;
 /*-----------------------------------------------------------------------------------------------------------------------------------------------------------------*/	
 			case 5:
+				System.out.println("\n********** RELATÓRIO DE CATEGORIZAÇÃO **********");
+				System.out.printf("Total de Candidatos: %.0f\n", manipuladorC.getLista().getDados()[0]);
+				System.out.print("____________________________________________________________________________________________________\n");
+				System.out.printf("\nCaracterização\nSexo\nFeminino: %.0f (%.2f%%)\n", manipuladorC.getLista().getDados()[1], manipuladorC.getLista().getDados()[1]/manipuladorC.getLista().getDados()[0]*100);
+				System.out.printf("Masculino: %.0f (%.2f%%)\n", manipuladorC.getLista().getDados()[2], manipuladorC.getLista().getDados()[2]/manipuladorC.getLista().getDados()[0]*100);
+				System.out.print("____________________________________________________________________________________________________\n");
+				System.out.printf("\nEscolaridade\nGradução: %.0f (%.2f%%)\n", manipuladorC.getLista().getDados()[3], manipuladorC.getLista().getDados()[3]/manipuladorC.getLista().getDados()[0]*100);
+				System.out.printf("Pós-Graduação: %.0f (%.2f%%)\n", manipuladorC.getLista().getDados()[4], manipuladorC.getLista().getDados()[4]/manipuladorC.getLista().getDados()[0]*100);
+				System.out.printf("Mestrado: %.0f (%.2f%%)\n", manipuladorC.getLista().getDados()[5], manipuladorC.getLista().getDados()[5]/manipuladorC.getLista().getDados()[0]*100);
+				System.out.printf("Doutorado: %.0f (%.2f%%)\n", manipuladorC.getLista().getDados()[6], manipuladorC.getLista().getDados()[6]/manipuladorC.getLista().getDados()[0]*100);
+				System.out.printf("Pós-doutorado: %.0f (%.2f%%)\n", manipuladorC.getLista().getDados()[7], manipuladorC.getLista().getDados()[7]/manipuladorC.getLista().getDados()[0]*100);
+				System.out.printf("____________________________________________________________________________________________________\n");
+				System.out.printf("\nÁrea de atuação\nAdministração: %.0f – Salário médio pretendido: R$ %.2f\n", manipuladorC.getLista().getDados()[8], manipuladorC.getLista().getDados()[15]/(int)manipuladorC.getLista().getDados()[8]);
+				System.out.printf("Engenharia: %.0f – Salário médio pretendido: R$ %.2f\n", manipuladorC.getLista().getDados()[9], manipuladorC.getLista().getDados()[16]/(int)manipuladorC.getLista().getDados()[9]);
+				System.out.printf("Meio Ambiente: %.0f – Salário médio pretendido: R$ %.2f\n", manipuladorC.getLista().getDados()[11], manipuladorC.getLista().getDados()[18]/(int)manipuladorC.getLista().getDados()[11]);
+				System.out.printf("Sociais e Humanas: %.0f – Salário médio pretendido: R$ %.2f\n", manipuladorC.getLista().getDados()[14], manipuladorC.getLista().getDados()[21]/(int)manipuladorC.getLista().getDados()[14]);
+				System.out.printf("Arte e Design: %.0f – Salário médio pretendido: R$ %.2f\n", manipuladorC.getLista().getDados()[10], manipuladorC.getLista().getDados()[17]/(int)manipuladorC.getLista().getDados()[10]);
+				System.out.printf("Tecnologia: %.0f – Salário médio pretendido: R$ %.2f\n", manipuladorC.getLista().getDados()[13], manipuladorC.getLista().getDados()[20]/(int)manipuladorC.getLista().getDados()[13]);
+				System.out.printf("Saúde: %.0f – Salário médio pretendido: R$ %.2f\n", manipuladorC.getLista().getDados()[12], manipuladorC.getLista().getDados()[19]/(int)manipuladorC.getLista().getDados()[12]);
+				System.out.print("____________________________________________________________________________________________________\n");
+				System.out.printf("\n\t\t Caracterização as vagas\nTotal de vagas: %.0f\n", manipuladorE.getLista().getDados()[26]);
+				System.out.print("____________________________________________________________________________________________________\n");
+				System.out.print("Vagas por empresa:\n");
 				
+				System.out.print("____________________________________________________________________________________________________\n");
+				System.out.print("\nVagas por área de atuação:\n");
+				System.out.printf("Administração: %.0f – Salário médio oferecido: R$ %.2f\n", manipuladorE.getLista().getDados()[0], manipuladorE.getLista().getDados()[7]/(int)manipuladorE.getLista().getDados()[14]);
+				System.out.printf("Engenharia: %.0f – Salário médio oferecido: R$ %.2f\n", manipuladorE.getLista().getDados()[1], manipuladorE.getLista().getDados()[8]/(int)manipuladorE.getLista().getDados()[15]);
+				System.out.printf("Arte e Design: %.0f – Salário médio oferecido: R$ %.2f\n", manipuladorE.getLista().getDados()[2], manipuladorE.getLista().getDados()[9]/(int)manipuladorE.getLista().getDados()[16]);
+				System.out.printf("Meio Ambiente: %.0f – Salário médio oferecido: R$ %.2f\n", manipuladorE.getLista().getDados()[3], manipuladorE.getLista().getDados()[10]/(int)manipuladorE.getLista().getDados()[17]);
+				System.out.printf("Saúde: %.0f – Salário médio oferecido: R$ %.2f\n", manipuladorE.getLista().getDados()[4], manipuladorE.getLista().getDados()[11]/(int)manipuladorE.getLista().getDados()[18]);
+				System.out.printf("Tecnologia: %.0f – Salário médio oferecido: R$ %.2f\n", manipuladorE.getLista().getDados()[5], manipuladorE.getLista().getDados()[12]/(int)manipuladorE.getLista().getDados()[19]);
+				System.out.printf("Sociais e Humanas: %.0f – Salário médio oferecido: R$ %.2f\n", manipuladorE.getLista().getDados()[6], manipuladorE.getLista().getDados()[13]/(int)manipuladorE.getLista().getDados()[20]);
+				System.out.print("____________________________________________________________________________________________________\n");
+				System.out.printf("\nVagas oferecidas por escolaridade mínima exigida:\nGraduação: %.0f (%.0f%%)\n", manipuladorE.getLista().getDados()[21], (manipuladorE.getLista().getDados()[21]*100)/manipuladorE.getLista().getDados()[26]);
+				System.out.printf("Pós-Graduação: %.0f (%.0f%%)\n", manipuladorE.getLista().getDados()[22], (manipuladorE.getLista().getDados()[22]*100)/manipuladorE.getLista().getDados()[26]);
+				System.out.printf("Mestrado: %.0f (%.0f%%)\n", manipuladorE.getLista().getDados()[23], (manipuladorE.getLista().getDados()[23]*100)/manipuladorE.getLista().getDados()[26]);
+				System.out.printf("Doutororado: %.0f (%.0f%%)\n", manipuladorE.getLista().getDados()[24], (manipuladorE.getLista().getDados()[24]*100)/manipuladorE.getLista().getDados()[26]);
+				System.out.printf("Pós-Doutorado: %.0f (%.0f%%)\n", manipuladorE.getLista().getDados()[25], (manipuladorE.getLista().getDados()[25]*100)/manipuladorE.getLista().getDados()[26]);
+				
+				System.out.print("\n\n\n");
+
 				break;
 /*-----------------------------------------------------------------------------------------------------------------------------------------------------------------*/					
 			case 6:
@@ -527,354 +575,6 @@ public class Aplicacao {
 			default:
 				break;
 			}
-			/*if (mostraMenu == true) {
-				System.out.print("\n\t\t\tMENU DE OPÇÕES\n\n");
-				System.out.print("\t\t1- Buscar\n\t\t2- Alterar dados\n\t\t"
-						+ "3- Excluir dado\n\t\t4- Inserir dado\n\t\t5- Excluir dados de uma pessoa\n\t\t"
-						+ "6- Relatório de categorização\n\t\t7- Relatório estatístico\n\t\t8- Sair\n\nInforme a opção desejada: ");
-				do {
-					op = leitor.nextInt();
-					lixo = leitor.nextLine();
-					if (op < 1 || op > 8)
-						System.out.print("Opção inválida. Informe novamente uma das opção entre 1 e 5: ");
-				} while (op < 1 || op > 8);
-			}
-			switch (op) {
-			case 1:
-				System.out.print("\t\t1 - Candidato\n\t\t2 - Empresa\nRealizar busca: ");
-				opUser = leitor.nextInt();
-				switch(opUser) {
-				case 1:
-					if (mostraMenu == true)
-						System.out.print("Para pesquisa, informe a identidade: ");
-					else
-						op = 4;
-					do {
-						identidade = leitor.nextInt();
-						lixo = leitor.nextLine();
-						if (identidade <= 0) {
-							System.out.print("\tInformação inválida. Informe novamente a identidade (número maior que zero): ");
-						}
-					} while (identidade <= 0);
-					if (manipuladorC.getArvore().pesquisar(identidade) != null)
-						System.out.println(manipuladorC.getArvore().pesquisar(identidade).toString());
-					else {
-						System.out.println("A identidade " + identidade + " não consta nos registros.");
-						mostraMenu = true;
-					}
-				break;
-				}
-			case 2:
-				System.out.print("\t\t1 - Candidato\n\t\t2 - Empresa\nRealizar alteração de dados: ");
-				opUser = leitor.nextInt();
-				switch(opUser) {
-				case 1:
-				int opAtualizar;
-					if (mostraMenu == true) {
-						System.out.print("Para atualização de dados, informe a identidade para verificar os dados atuais: ");
-						mostraMenu = false;
-						op = 3;
-					} 
-					else {
-						
-						do {
-							System.out.print("\nOs dados atualizáveis são:\n\t1- Nome\n\t2- Idade\n\t3- Sexo\n\t4- Escolaridade\n\t"
-											+ "5- Área de atuação\n\t6- Pretensão Salarial\n\t7- Cancelar\nInforme a opção desejada: ");
-							do {
-								opAtualizar = leitor.nextInt();
-								lixo = leitor.nextLine();
-								if (opAtualizar < 1 || opAtualizar > 7)
-									System.out.print("Opção inválida. Informe novamente uma das opção entre 1 e 8: ");
-							} while (opAtualizar < 1 || opAtualizar > 7);
-							
-							if(opAtualizar == 1) {
-								System.out.print("Informe o nome para atualização: ");
-								C[1] = leitor.nextLine();
-								if (manipuladorC.getArvore().pesquisar(identidade) != null) {
-									manipuladorC.getArvore().pesquisar(identidade).setNome(C[1]);
-									manipuladorC.armazenaDadosArquivo(identidade);
-								}
-							}
-							else if(opAtualizar == 2) {
-								System.out.print("Informe a idade para atualização: ");
-								do {
-									C[2] = String.valueOf(leitor.nextInt());
-									lixo = leitor.nextLine();
-									if (Integer.parseInt(C[2]) < 0)
-										System.out.print("\tInformação inválida. Informe novamente a idade (valor não nulo): ");
-								} while (Integer.parseInt(C[2]) < 0);
-								if (manipuladorC.getArvore().pesquisar(identidade) != null) {
-									manipuladorC.getArvore().pesquisar(identidade).setIdade(Integer.parseInt(C[2]));
-									manipuladorC.armazenaDadosArquivo(identidade);
-								}
-							}
-							else if(opAtualizar == 3) {
-								System.out.print("Informe o sexo para atualização ( m / f ): ");
-								do {
-									C[3] = String.valueOf(leitor.next().charAt(0));
-									if (!C[3].equalsIgnoreCase("m") && !C[3].equalsIgnoreCase("M")
-											&& !C[3].equalsIgnoreCase("f") && !C[3].equalsIgnoreCase("F"))
-										System.out.print("\tInformação inválida. Informe novamente o sexo ( m / f ): ");
-								} while (!C[3].equalsIgnoreCase("m") && !C[3].equalsIgnoreCase("M")
-										&& !C[3].equalsIgnoreCase("f") && !C[3].equalsIgnoreCase("F"));
-								if (manipuladorC.getArvore().pesquisar(identidade) != null) {
-									manipuladorC.getArvore().pesquisar(identidade).setSexo(C[3]);
-									manipuladorC.armazenaDadosArquivo(identidade);
-								}
-							}
-							else if(opAtualizar == 4) {
-								System.out.print("Escolaridade (Graduação / Pós-Graduação / Mestrado / Doutorado / Pós-Doutorado): ");
-								do {
-									C[4] = leitor.nextLine();
-									if (!C[4].equalsIgnoreCase("Pos-Doutorado") && !C[4].equalsIgnoreCase("Pós-Doutorado") 
-											&& !C[4].equalsIgnoreCase("Graduação") && !C[4].equalsIgnoreCase("Pós-Graduação")
-											&& !C[4].equalsIgnoreCase("Mestrado") && !C[4].equalsIgnoreCase("Doutorado"))
-										System.out.print(
-												"\tInformação inválida. Informe novamente a Escolaridade (Graduação / Pós-Graduação / Mestrado / Doutorado / Pós-Doutorado): ");
-								} while (!C[4].equalsIgnoreCase("Pos-Doutorado") && !C[4].equalsIgnoreCase("Pós-Doutorado") 
-										&& !C[4].equalsIgnoreCase("Graduação") && !C[4].equalsIgnoreCase("Pós-Graduação")
-										&& !C[4].equalsIgnoreCase("Mestrado") && !C[4].equalsIgnoreCase("Doutorado"));
-								
-								if (manipuladorC.getArvore().pesquisar(identidade) != null) {
-									manipuladorC.getArvore().pesquisar(identidade).setEscolaridade(C[4]);
-									manipuladorC.armazenaDadosArquivo(identidade);
-								}
-							}
-							else if(opAtualizar == 5) {
-								System.out.print("Área de atuação (Administração / Engenharia / Arte e Design / Meio Ambiente / Saúde / Tecnologia / Sociais e Humanas): ");
-								do {
-									C[5] = leitor.nextLine();
-									if (!C[5].equalsIgnoreCase("Administração") && !C[5].equalsIgnoreCase("Administracão")
-											&& !C[5].equalsIgnoreCase("Administraçao") && !C[5].equalsIgnoreCase("Administracao") 
-											&& !C[5].equalsIgnoreCase("Engenharia") && !C[5].equalsIgnoreCase("Arte e Desgin") 
-											&& !C[5].equalsIgnoreCase("Meio Ambiente") && !C[5].equalsIgnoreCase("Saúde")
-											&& !C[5].equalsIgnoreCase("Saude") && !C[5].equalsIgnoreCase("Tecnologia")
-											&& !C[5].equalsIgnoreCase("Sociais e Humanas"))
-										System.out.print(
-												"\tInformação inválida. Informe novamente a Área de atuação (Administração / Engenharia / Arte e Design / Meio Ambiente / Saúde / Tecnologia / Sociais e Humanas): ");
-								} while (!C[5].equalsIgnoreCase("Administração") && !C[5].equalsIgnoreCase("Administracão")
-										&& !C[5].equalsIgnoreCase("Administraçao") && !C[5].equalsIgnoreCase("Administracao") 
-										&& !C[5].equalsIgnoreCase("Engenharia") && !C[5].equalsIgnoreCase("Arte e Desgin") 
-										&& !C[5].equalsIgnoreCase("Meio Ambiente") && !C[5].equalsIgnoreCase("Saúde")
-										&& !C[5].equalsIgnoreCase("Saude") && !C[5].equalsIgnoreCase("Tecnologia")
-										&& !C[5].equalsIgnoreCase("Sociais e Humanas"));
-								if (manipuladorC.getArvore().pesquisar(identidade) != null) {
-									manipuladorC.getArvore().pesquisar(identidade).setAtuacao(C[5]);
-									manipuladorC.armazenaDadosArquivo(identidade);
-								}
-							}
-							else if(opAtualizar == 6) {
-								System.out.print("Informe nova pretensão salarial para atualização: ");
-								do {
-									C[6] = String.valueOf(leitor.nextFloat());
-									lixo = leitor.nextLine();
-									if (Float.parseFloat(C[6]) < 0.0)
-										System.out.print("\tInformação inválida. Informe novamente a idade (valor não nulo): ");
-								} while (Float.parseFloat(C[6]) < 0.0);
-								if (manipuladorC.getArvore().pesquisar(identidade) != null) {
-									manipuladorC.getArvore().pesquisar(identidade).setPretensao(Float.parseFloat(C[6]));
-									manipuladorC.armazenaDadosArquivo(identidade);
-								}
-							}
-							else{}
-						}while(opAtualizar != 7);
-					}
-			break;
-				}
-			case 3:
-				System.out.print("\t\t1 - Candidato\n\t\t2 - Empresa\nRealizar exclusão de dado: ");
-				opUser = leitor.nextInt();
-				
-				switch(opUser) {
-				case 1:
-					System.out.print("Para excluir um registra, digite a identidade do candidato: ");
-					do {
-						identidade = leitor.nextInt();
-						lixo = leitor.nextLine();
-						if (identidade <= 0)
-							System.out.print("\tInformação inválida. Informe novamente a identidade (número maior que zero): ");
-					} while (identidade <= 0);
-					candidato = manipuladorC.getArvore().pesquisar(identidade);
-					if(candidato == null) {
-						System.out.println("A identidade " + identidade + " não consta nos registros.");
-					} else {
-						manipuladorC.getArvore().remover(identidade);
-						/*C[0] = String.valueOf(candidato.getId());
-						C[1] = candidato.getNome();
-						C[2] = String.valueOf(candidato.getIdade());
-						C[3] = String.valueOf(candidato.getSexo());
-						C[4] = candidato.getEscolaridade();
-						C[5] = candidato.getAtuacao();
-						C[6] = String.valueOf(candidato.getPretensao());
-						categorias = manipuladorC.defineCategorias(C);
-						for (int i = 0; i < 5; i++)
-							manipuladorC.getEstruturaLista().getLista(categorias[i]).retirar(candidato.getId());
-						manipuladorC.armazenaDadosArquivo();
-					}
-					break;
-				}
-			case 4:
-				System.out.print("\t\t1 - Candidato\n\t\t2 - Empresa\nInseir dados: ");
-				opUser = leitor.nextInt();
-				switch(opUser) {
-				case 1:
-					if (mostraMenu == true) {
-						System.out.print("\nInforme os dados abaixo:\nIdentidade: ");
-						do {
-							C[0] = String.valueOf(leitor.nextInt());
-							lixo = leitor.nextLine();
-							if (Integer.parseInt(C[0]) <= 0)
-								System.out.print(
-										"\tInformação inválida. Informe novamente a identidade (número maior que zero): ");
-						} while (Integer.parseInt(C[0]) <= 0);
-					} else {
-						System.out.print("\nInforme os dados abaixo (para sair, escreva \"sair\"):\nIdentidade: ");
-						do {
-							C[0] = leitor.nextLine();
-							if (C[0].equalsIgnoreCase("sair")) {
-								mostraMenu = true;
-								break;
-							} else {
-								if (Integer.parseInt(C[0]) > 0)
-									C[0] = String.valueOf(C[0]);
-								else
-									System.out.print(
-											"\tInformação inválida. Informe novamente a identidade (número maior que zero): ");
-							}
-						} while (!C[0].equalsIgnoreCase("sair") && Integer.parseInt(C[0]) <= 0);
-						
-					}
-
-					if (!C[0].equalsIgnoreCase("sair")) {
-						if (manipuladorC.getArvore().pesquisar(Integer.parseInt(C[0])) == null) {
-
-							System.out.print("Nome completo: ");
-							C[1] = leitor.nextLine();
-							
-							System.out.print("Idade: ");
-							do {
-								C[2] = String.valueOf(leitor.nextInt());
-								lixo = leitor.nextLine();
-								if (Integer.parseInt(C[2]) < 0)
-									System.out.print("\tInformação inválida. Informe novamente a idade (valor não nulo): ");
-							} while (Integer.parseInt(C[2]) < 0);
-							
-							System.out.print("Sexo ( m / f ): ");
-							do {
-								C[3] = String.valueOf(leitor.next().charAt(0));
-								if (!C[3].equalsIgnoreCase("m") && !C[3].equalsIgnoreCase("M")
-										&& !C[3].equalsIgnoreCase("f") && !C[3].equalsIgnoreCase("F"))
-									System.out.print("\tInformação inválida. Informe novamente o sexo ( m / f ): ");
-							} while (!C[3].equalsIgnoreCase("m") && !C[3].equalsIgnoreCase("M")
-									&& !C[3].equalsIgnoreCase("f") && !C[3].equalsIgnoreCase("F"));
-
-							System.out.print("Escolaridade (Graduação / Pós-Graduação / Mestrado / Doutorado / Pós-Doutorado): ");
-							do {
-								C[4] = leitor.nextLine();
-								if (!C[4].equalsIgnoreCase("Pos-Doutorado") && !C[4].equalsIgnoreCase("Pós-Doutorado") 
-										&& !C[4].equalsIgnoreCase("Graduação") && !C[4].equalsIgnoreCase("Pós-Graduação")
-										&& !C[4].equalsIgnoreCase("Mestrado") && !C[4].equalsIgnoreCase("Doutorado"))
-									System.out.print(
-											"\tInformação inválida. Informe novamente a Escolaridade (Graduação / Pós-Graduação / Mestrado / Doutorado / Pós-Doutorado): ");
-							} while (!C[4].equalsIgnoreCase("Pos-Doutorado") && !C[4].equalsIgnoreCase("Pós-Doutorado") 
-									&& !C[4].equalsIgnoreCase("Graduação") && !C[4].equalsIgnoreCase("Pós-Graduação")
-									&& !C[4].equalsIgnoreCase("Mestrado") && !C[4].equalsIgnoreCase("Doutorado"));
-
-							
-							System.out.print("Área de atuação (Administração / Engenharia / Arte e Design / Meio Ambiente / Saúde / Tecnologia / Sociais e Humanas): ");
-							do {
-								C[5] = leitor.nextLine();
-								if (!C[5].equalsIgnoreCase("Administração") && !C[5].equalsIgnoreCase("Administracão")
-										&& !C[5].equalsIgnoreCase("Administraçao") && !C[5].equalsIgnoreCase("Administracao") 
-										&& !C[5].equalsIgnoreCase("Engenharia") && !C[5].equalsIgnoreCase("Arte e Desgin") 
-										&& !C[5].equalsIgnoreCase("Meio Ambiente") && !C[5].equalsIgnoreCase("Saúde")
-										&& !C[5].equalsIgnoreCase("Saude") && !C[5].equalsIgnoreCase("Tecnologia")
-										&& !C[5].equalsIgnoreCase("Sociais e Humanas"))
-									System.out.print(
-											"\tInformação inválida. Informe novamente a Área de atuação (Administração / Engenharia / Arte e Design /"
-											+ " Meio Ambiente / Saúde / Tecnologia / Sociais e Humanas): ");
-							} while (!C[5].equalsIgnoreCase("Administração") && !C[5].equalsIgnoreCase("Administracão")
-									&& !C[5].equalsIgnoreCase("Administraçao") && !C[5].equalsIgnoreCase("Administracao") 
-									&& !C[5].equalsIgnoreCase("Engenharia") && !C[5].equalsIgnoreCase("Arte e Desgin") 
-									&& !C[5].equalsIgnoreCase("Meio Ambiente") && !C[5].equalsIgnoreCase("Saúde")
-									&& !C[5].equalsIgnoreCase("Saude") && !C[5].equalsIgnoreCase("Tecnologia")
-									&& !C[5].equalsIgnoreCase("Sociais e Humanas"));
-							
-							System.out.print("Pretensão Salarial: ");
-							do {
-								C[6] = String.valueOf(leitor.nextFloat());
-								lixo = leitor.nextLine();
-								if (Float.parseFloat(C[6]) < 0.0)
-									System.out.print("\tInformação inválida. Informe novamente o salário pretendido (valor não nulo): ");
-							} while (Float.parseFloat(C[6]) < 0.0);
-							candidato = new Candidato(Integer.parseInt(C[0]), C[1], Integer.parseInt(C[2]), C[3], C[4], C[5], Float.parseFloat(C[6]));
-							manipuladorC.gravaDadosArquivo(candidato);
-						} else
-							mostraMenu = true;
-					}
-					break;
-				}
-				break;
-			case 5:
-				
-				break;
-			case 6:
-			case 7:
-				RelatorioCandidato relatorioC = manipuladorC.geraIndicadores();
-				float totalCandidato = relatorioC.getTotalCandidato();
-				float candidatoF = relatorioC.getCandidatoF();
-				float candidatoM = relatorioC.getCandidatoM();
-				
-				float EscGrad = relatorioC.getEscGrad();
-				float EscPosGrad = relatorioC.getEscPosGrad();
-				float EscMest = relatorioC.getEscMest();
-				float EscDout = relatorioC.getEscDout();
-				float EscPosDout = relatorioC.getEscPosDout();
-				
-				float Adm = relatorioC.getTotalAdm();
-				float Eng = relatorioC.getTotalEng();
-				float MeioAmb = relatorioC.getTotalMeioAmb();
-				float SociaHuman =relatorioC.getTotalSociaHuman();
-				float ArteDesi = relatorioC.getTotalArteDesi();
-				float Tec = relatorioC.getTotalTecno();
-				float Saude = relatorioC.getTotalSaude();
-				
-				float AdmSalario = relatorioC.getAdmSalario();
-				float EngSalario = relatorioC.getEngSalario();
-				float ArteDesiSalario = relatorioC.getArteDesiSalario();
-				float SaudeSalario = relatorioC.getSaudeSalario();
-				float MeioAmbSalario = relatorioC.getMeioAmbSalario();
-				float TecnoSalario = relatorioC.getTecnoSalario();
-				float SociaHumanSalario = relatorioC.getSociaHumanSalario();
-				
-				System.out.println("\n********** RELATÓRIO DE CATEGORIZAÇÃO **********");
-				System.out.printf("População total: %.0f\n", totalCandidato);
-				System.out.printf("____________________________________________________________________________________________________\n");
-				System.out.printf("\nCaracterização\nSexo\nFeminino: %.0f (%.2f%%)\n", candidatoF, candidatoF/totalCandidato*100);
-				System.out.printf("Masculino: %.0f (%.2f%%)\n", candidatoM, candidatoM/totalCandidato*100);
-				System.out.printf("____________________________________________________________________________________________________\n");
-				System.out.printf("\nEscolaridade\nGradução: %.0f (%.2f%%)\n", EscGrad, EscGrad/totalCandidato*100);
-				System.out.printf("Pós-Graduação: %.0f (%.2f%%)\n", EscPosGrad, EscPosGrad/totalCandidato*100);
-				System.out.printf("Mestrado: %.0f (%.2f%%)\n", EscMest, EscMest/totalCandidato*100);
-				System.out.printf("Doutorado: %.0f (%.2f%%)\n", EscDout, EscDout/totalCandidato*100);
-				System.out.printf("Pós-doutorado: %.0f (%.2f%%)\n", EscPosDout, EscPosDout/totalCandidato*100);
-				System.out.printf("____________________________________________________________________________________________________\n");
-				System.out.printf("\nÁrea de atuação\nAdministração: %.0f (%.2f%%)\n", Adm, AdmSalario);
-				System.out.printf("Engenharia: %.0f (%.2f%%)\n", Eng, EngSalario);
-				System.out.printf("Meio Ambiente: %.0f (%.2f%%)\n", MeioAmb, MeioAmbSalario);
-				System.out.printf("Sociais e Humanas: %.0f (%.2f%%)\n", SociaHuman, SociaHumanSalario);
-				System.out.printf("Arte e Design: %.0f (%.2f%%)\n", ArteDesi, ArteDesiSalario);
-				System.out.printf("Tecnologia: %.0f (%.2f%%)\n", Tec, TecnoSalario);
-				System.out.printf("Saúde: %.0f (%.2f%%)\n", Saude, SaudeSalario);
-				System.out.printf("____________________________________________________________________________________________________\n");
-				
-				break;
-			case 8:
-				System.out.println("\n\n\t\t************************ OBRIGADA!!! ************************\n\n");
-				break;
-			default:
-				break;
-			}*/
 		}while (op != 6);
 	}
 }

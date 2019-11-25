@@ -1,9 +1,20 @@
 package candidato;
 
+import Empresa.CelulaEmpresa;
 
 public class Lista {
 	private CelulaCandidato primeiro;
 	private CelulaCandidato ultimo; 
+	private float[] dados = new float[22];
+	private String[] porEscolaridade = new String[5];
+	
+	public float[] getDados() {
+		return dados;
+	}
+
+	public String[] getPorEscolaridade() {
+		return porEscolaridade;
+	}
 
 	public Lista()
 	{
@@ -88,7 +99,468 @@ public class Lista {
     				+ aux.item.getEscolaridade() + ";" + aux.item.getAtuacao() + ";" + String.valueOf(aux.item.getPretensao() + "\n");
     		aux = aux.proximo;
     	}
+    	
     	return dados;
+    }
+    
+    
+    public void gestorDados() {
+    	CelulaCandidato aux = primeiro.proximo;
+    	int i = 0;
+    	while(i < 22) {
+    		dados[i] = 0;
+    		i++;
+    	}
+    	
+    	while(aux != null) {
+    		dados[0] += 1;
+    		
+    		if(aux.item.getSexo().equalsIgnoreCase("f"))
+    			dados[1] += 1;
+    		else
+    			dados[2] += 1;
+    		
+    		if(aux.item.getEscolaridade().equalsIgnoreCase("Graduação") || aux.item.getEscolaridade().equalsIgnoreCase("Graduacao") 
+    				|| aux.item.getEscolaridade().equalsIgnoreCase("Graduacão") || aux.item.getEscolaridade().equalsIgnoreCase("Graduacao") 
+    				|| aux.item.getEscolaridade().equalsIgnoreCase("Graduacao"))
+    			dados[3] += 1;
+    		else if(aux.item.getEscolaridade().equalsIgnoreCase("Pós-Graduação") || aux.item.getEscolaridade().equalsIgnoreCase("pos-graduacao"))
+    			dados[4] += 1;
+    		else if(aux.item.getEscolaridade().equalsIgnoreCase("Mestrado") || aux.item.getEscolaridade().equalsIgnoreCase("mestrado"))
+    			dados[5] += 1;
+    		else if(aux.item.getEscolaridade().equalsIgnoreCase("doutorado") || aux.item.getEscolaridade().equalsIgnoreCase("Doutorado"))
+    			dados[6] += 1;
+    		else if(aux.item.getEscolaridade().equalsIgnoreCase("Pos-Doutorado") || aux.item.getEscolaridade().equalsIgnoreCase("pos-doutorado") 
+    				|| aux.item.getEscolaridade().equalsIgnoreCase("Pós-Doutorado"))
+    			dados[7] += 1;
+    		
+    		if(aux.item.getAtuacao().equalsIgnoreCase("Administração") || aux.item.getAtuacao().equalsIgnoreCase("Administracão")
+    				|| aux.item.getAtuacao().equalsIgnoreCase("Administraçao") || aux.item.getAtuacao().equalsIgnoreCase("Administracao") 
+    				|| aux.item.getAtuacao().equalsIgnoreCase("administracao")) {
+    			dados[8] += 1;
+    			dados[15] += aux.item.getPretensao();
+    		}	
+    		else if(aux.item.getAtuacao().equalsIgnoreCase("Engenharia") || aux.item.getAtuacao().equalsIgnoreCase("engenharia")) {
+    			dados[9] += 1;
+    			dados[16] += aux.item.getPretensao();
+    		}
+    		else if(aux.item.getAtuacao().equalsIgnoreCase("Arte e Design") || aux.item.getAtuacao().equalsIgnoreCase("arte e design")) {
+    			dados[10] += 1;
+    			dados[17] += aux.item.getPretensao();
+    		}
+    		else if(aux.item.getAtuacao().equalsIgnoreCase("Meio Ambiente") || aux.item.getAtuacao().equalsIgnoreCase("meio ambiente")) {
+    			dados[11] += 1;
+    			dados[18] += aux.item.getPretensao();
+    		}
+    		else if(aux.item.getAtuacao().equalsIgnoreCase("Saúde") || aux.item.getAtuacao().equalsIgnoreCase("Saude") || aux.item.getAtuacao().equalsIgnoreCase("saude")) {
+    			dados[12] += 1;
+    			dados[19] += aux.item.getPretensao();
+    		}
+    		else if(aux.item.getAtuacao().equalsIgnoreCase("Tecnologia") || aux.item.getAtuacao().equalsIgnoreCase("tecnologia")) {
+    			dados[13] += 1;
+    			dados[20] += aux.item.getPretensao();
+    		}
+    		else if(aux.item.getAtuacao().equalsIgnoreCase("Sociais e Humanas") || aux.item.getAtuacao().equalsIgnoreCase("sociais e humanas")) {
+    			dados[14] += 1;
+    			dados[21] += aux.item.getPretensao();
+    		}
+    		
+    		aux = aux.proximo;
+    	}
+    	
+    }
+    
+    public void vagaPorEscolaridade() {
+    	CelulaCandidato aux = primeiro.proximo;
+    	String dado = "";
+    	while(aux != null) {
+    		if(aux.item.getEscolaridade().equalsIgnoreCase("Graduação") || aux.item.getEscolaridade().equalsIgnoreCase("Graduacao") 
+    				|| aux.item.getEscolaridade().equalsIgnoreCase("Graduacão") || aux.item.getEscolaridade().equalsIgnoreCase("Graduacao") 
+    				|| aux.item.getEscolaridade().equalsIgnoreCase("Graduacao"))
+    			dados[3] += 1;
+    		else if(aux.item.getEscolaridade().equalsIgnoreCase("Pós-Graduação") || aux.item.getEscolaridade().equalsIgnoreCase("pos-graduacao"))
+    			dados[4] += 1;
+    		else if(aux.item.getEscolaridade().equalsIgnoreCase("Mestrado") || aux.item.getEscolaridade().equalsIgnoreCase("mestrado"))
+    			dados[5] += 1;
+    		else if(aux.item.getEscolaridade().equalsIgnoreCase("doutorado") || aux.item.getEscolaridade().equalsIgnoreCase("Doutorado"))
+    			dados[6] += 1;
+    		else if(aux.item.getEscolaridade().equalsIgnoreCase("Pos-Doutorado") || aux.item.getEscolaridade().equalsIgnoreCase("pos-doutorado") 
+    				|| aux.item.getEscolaridade().equalsIgnoreCase("Pós-Doutorado"))
+    			dados[7] += 1;
+    		
+    		aux = aux.proximo;
+    	}
+    }
+    
+    public String localizaVagas(String atuacao, String escolaridade) {
+    	String dados = "";
+
+    	if(atuacao.equalsIgnoreCase("administracao")) { 	    	
+    		if(escolaridade.equalsIgnoreCase("graduacao")) {
+    			CelulaCandidato aux = primeiro.proximo;
+    			while(aux != null) {
+    				if(aux.item.getAtuacao().equalsIgnoreCase(atuacao) && !aux.item.getEscolaridade().equalsIgnoreCase(escolaridade))
+    					dados += "Nome: " + aux.item.getNome() + "\nCargo: " + aux.item.getAtuacao() + "\nVagas: " + String.valueOf(aux.item.getVagas())  + "\nEscolaridade exigida: "
+    	    	        + aux.item.getEscolaridade() + "\nSalário oferecido: " + String.valueOf(aux.item.getSalario()) + "\n\n";
+    				aux = aux.proximo;
+    			}
+    			return dados;
+    		}
+
+    		else if(escolaridade.equalsIgnoreCase("pos-graduacao")) {
+    			CelulaEmpresa aux = primeiro.proximo;
+    			while(aux != null) {
+    				if(aux.item.getAtuacao().equalsIgnoreCase(atuacao) && (aux.item.getEscolaridade().equalsIgnoreCase("graduacao") || aux.item.getEscolaridade().equalsIgnoreCase("pos-graduacao")))
+    					dados += "Empresa: " + aux.item.getNome() + "\nCargo: " + aux.item.getAtuacao() + "\nVagas: " + String.valueOf(aux.item.getVagas())  + "\nEscolaridade exigida: "
+    	    	    	        + aux.item.getEscolaridade() + "\nSalário oferecido: " + String.valueOf(aux.item.getSalario()) + "\n\n";
+    				aux = aux.proximo;
+    			}
+    			return dados;
+    		}
+    		else if(escolaridade.equalsIgnoreCase("mestrado")) {
+    			CelulaEmpresa aux = primeiro.proximo;
+    			while(aux != null) {
+    				if(aux.item.getAtuacao().equalsIgnoreCase(atuacao) && !(aux.item.getEscolaridade().equalsIgnoreCase("doutorado") || aux.item.getEscolaridade().equalsIgnoreCase("pos-doutorado")))
+    					dados += "Empresa: " + aux.item.getNome() + "\nCargo: " + aux.item.getAtuacao() + "\nVagas: " + String.valueOf(aux.item.getVagas())  + "\nEscolaridade exigida: "
+    	    	    	        + aux.item.getEscolaridade() + "\nSalário oferecido: " + String.valueOf(aux.item.getSalario()) + "\n\n";
+    				aux = aux.proximo;
+    			}
+    			return dados;
+    		}
+    		else if(escolaridade.equalsIgnoreCase("doutorado")) {
+    			CelulaEmpresa aux = primeiro.proximo;
+    			while(aux != null) {
+    				if(aux.item.getAtuacao().equalsIgnoreCase(atuacao) && !aux.item.getEscolaridade().equalsIgnoreCase("pos-doutorado"))
+    					dados += "Empresa: " + aux.item.getNome() + "\nCargo: " + aux.item.getAtuacao() + "\nVagas: " + String.valueOf(aux.item.getVagas())  + "\nEscolaridade exigida: "
+    	    	    	        + aux.item.getEscolaridade() + "\nSalário oferecido: " + String.valueOf(aux.item.getSalario()) + "\n\n";
+    				aux = aux.proximo;
+    			}
+    			return dados;
+    		}
+    		else if(escolaridade.equalsIgnoreCase("pos-doutorado")) {
+    			CelulaEmpresa aux = primeiro.proximo;
+    			while(aux != null) {
+    				if(aux.item.getAtuacao().equalsIgnoreCase(atuacao))
+    					dados += "Empresa: " + aux.item.getNome() + "\nCargo: " + aux.item.getAtuacao() + "\nVagas: " + String.valueOf(aux.item.getVagas())  + "\nEscolaridade exigida: "
+    	    	    	        + aux.item.getEscolaridade() + "\nSalário oferecido: " + String.valueOf(aux.item.getSalario()) + "\n\n";
+    				aux = aux.proximo;
+    			}
+    			return dados;
+    		}
+    		else
+    			System.out.print("EScolaridade inexistente em nossos registros");
+    		return dados;
+    	}
+    	
+    	else if(atuacao.equalsIgnoreCase("engenharia")) {
+    		if(escolaridade.equalsIgnoreCase("graduacao")) {
+    			CelulaEmpresa aux = primeiro.proximo;
+    			while(aux != null) {
+    				if(aux.item.getAtuacao().equalsIgnoreCase(atuacao) && aux.item.getEscolaridade().equalsIgnoreCase(escolaridade))
+    					dados += "Empresa: " + aux.item.getNome() + "\nCargo: " + aux.item.getAtuacao() + "\nVagas: " + String.valueOf(aux.item.getVagas())  + "\nEscolaridade exigida: "
+    	    	    	        + aux.item.getEscolaridade() + "\nSalário oferecido: " + String.valueOf(aux.item.getSalario()) + "\n\n";
+    				aux = aux.proximo;
+    			}
+    		}
+
+    		else if(escolaridade.equalsIgnoreCase("pos-graduacao")) {
+    			CelulaEmpresa aux = primeiro.proximo;
+    			while(aux != null) {
+    				if(aux.item.getAtuacao().equalsIgnoreCase(atuacao) && (aux.item.getEscolaridade().equalsIgnoreCase("graduacao") || aux.item.getEscolaridade().equalsIgnoreCase("pos-graduacao")))
+    					dados += "Empresa: " + aux.item.getNome() + "\nCargo: " + aux.item.getAtuacao() + "\nVagas: " + String.valueOf(aux.item.getVagas())  + "\nEscolaridade exigida: "
+    	    	    	        + aux.item.getEscolaridade() + "\nSalário oferecido: " + String.valueOf(aux.item.getSalario()) + "\n\n";
+    				aux = aux.proximo;
+    			}
+    		}
+    		else if(escolaridade.equalsIgnoreCase("mestrado")) {
+    			CelulaEmpresa aux = primeiro.proximo;
+    			while(aux != null) {
+    				if(aux.item.getAtuacao().equalsIgnoreCase(atuacao) && !(aux.item.getEscolaridade().equalsIgnoreCase("doutorado") || aux.item.getEscolaridade().equalsIgnoreCase("pos-doutorado")))
+    					dados += "Empresa: " + aux.item.getNome() + "\nCargo: " + aux.item.getAtuacao() + "\nVagas: " + String.valueOf(aux.item.getVagas())  + "\nEscolaridade exigida: "
+    	    	    	        + aux.item.getEscolaridade() + "\nSalário oferecido: " + String.valueOf(aux.item.getSalario()) + "\n\n";
+    				aux = aux.proximo;
+    			}
+    		}
+    		else if(escolaridade.equalsIgnoreCase("doutorado")) {
+    			CelulaEmpresa aux = primeiro.proximo;
+    			while(aux != null) {
+    				if(aux.item.getAtuacao().equalsIgnoreCase(atuacao) && !aux.item.getEscolaridade().equalsIgnoreCase("pos-doutorado"))
+    					dados += "Empresa: " + aux.item.getNome() + "\nCargo: " + aux.item.getAtuacao() + "\nVagas: " + String.valueOf(aux.item.getVagas())  + "\nEscolaridade exigida: "
+    	    	    	        + aux.item.getEscolaridade() + "\nSalário oferecido: " + String.valueOf(aux.item.getSalario()) + "\n\n";
+    				aux = aux.proximo;
+    			}
+    		}
+    		else if(escolaridade.equalsIgnoreCase("pos-doutorado")) {
+    			CelulaEmpresa aux = primeiro.proximo;
+    			while(aux != null) {
+    				if(aux.item.getAtuacao().equalsIgnoreCase(atuacao))
+    					dados += "Empresa: " + aux.item.getNome() + "\nCargo: " + aux.item.getAtuacao() + "\nVagas: " + String.valueOf(aux.item.getVagas())  + "\nEscolaridade exigida: "
+    	    	    	        + aux.item.getEscolaridade() + "\nSalário oferecido: " + String.valueOf(aux.item.getSalario()) + "\n\n";
+    				aux = aux.proximo;
+    			}
+    		}
+    		else
+    			System.out.print("EScolaridade inexistente em nossos registros");
+    		return dados;
+    	}
+    	else if(atuacao.equalsIgnoreCase("arte e design")) {
+    		if(escolaridade.equalsIgnoreCase("graduacao")) {
+    			CelulaEmpresa aux = primeiro.proximo;
+    			while(aux != null) {
+    				if(aux.item.getAtuacao().equalsIgnoreCase(atuacao) && aux.item.getEscolaridade().equalsIgnoreCase(escolaridade))
+    					dados += "Empresa: " + aux.item.getNome() + "\nCargo: " + aux.item.getAtuacao() + "\nVagas: " + String.valueOf(aux.item.getVagas())  + "\nEscolaridade exigida: "
+    	    	    	        + aux.item.getEscolaridade() + "\nSalário oferecido: " + String.valueOf(aux.item.getSalario()) + "\n\n";
+    				aux = aux.proximo;
+    			}
+    		}
+
+    		else if(escolaridade.equalsIgnoreCase("pos-graduacao")) {
+    			CelulaEmpresa aux = primeiro.proximo;
+    			while(aux != null) {
+    				if(aux.item.getAtuacao().equalsIgnoreCase(atuacao) && (aux.item.getEscolaridade().equalsIgnoreCase("graduacao") || aux.item.getEscolaridade().equalsIgnoreCase("pos-graduacao")))
+    					dados += "Empresa: " + aux.item.getNome() + "\nCargo: " + aux.item.getAtuacao() + "\nVagas: " + String.valueOf(aux.item.getVagas())  + "\nEscolaridade exigida: "
+    	    	    	        + aux.item.getEscolaridade() + "\nSalário oferecido: " + String.valueOf(aux.item.getSalario()) + "\n\n";
+    				aux = aux.proximo;
+    			}
+    		}
+    		else if(escolaridade.equalsIgnoreCase("mestrado")) {
+    			CelulaEmpresa aux = primeiro.proximo;
+    			while(aux != null) {
+    				if(aux.item.getAtuacao().equalsIgnoreCase(atuacao) && !(aux.item.getEscolaridade().equalsIgnoreCase("doutorado") || aux.item.getEscolaridade().equalsIgnoreCase("pos-doutorado")))
+    					dados += "Empresa: " + aux.item.getNome() + "\nCargo: " + aux.item.getAtuacao() + "\nVagas: " + String.valueOf(aux.item.getVagas())  + "\nEscolaridade exigida: "
+    	    	    	        + aux.item.getEscolaridade() + "\nSalário oferecido: " + String.valueOf(aux.item.getSalario()) + "\n\n";
+    				aux = aux.proximo;
+    			}
+    		}
+    		else if(escolaridade.equalsIgnoreCase("doutorado")) {
+    			CelulaEmpresa aux = primeiro.proximo;
+    			while(aux != null) {
+    				if(aux.item.getAtuacao().equalsIgnoreCase(atuacao) && !aux.item.getEscolaridade().equalsIgnoreCase("pos-doutorado"))
+    					dados += "Empresa: " + aux.item.getNome() + "\nCargo: " + aux.item.getAtuacao() + "\nVagas: " + String.valueOf(aux.item.getVagas())  + "\nEscolaridade exigida: "
+    	    	    	        + aux.item.getEscolaridade() + "\nSalário oferecido: " + String.valueOf(aux.item.getSalario()) + "\n\n";
+    				aux = aux.proximo;
+    			}
+    		}
+    		else if(escolaridade.equalsIgnoreCase("pos-doutorado")) {
+    			CelulaEmpresa aux = primeiro.proximo;
+    			while(aux != null) {
+    				if(aux.item.getAtuacao().equalsIgnoreCase(atuacao))
+    					dados += "Empresa: " + aux.item.getNome() + "\nCargo: " + aux.item.getAtuacao() + "\nVagas: " + String.valueOf(aux.item.getVagas())  + "\nEscolaridade exigida: "
+    	    	    	        + aux.item.getEscolaridade() + "\nSalário oferecido: " + String.valueOf(aux.item.getSalario()) + "\n\n";
+    				aux = aux.proximo;
+    			}
+    		}
+    		else
+    			System.out.print("EScolaridade inexistente em nossos registros");
+    		return dados;
+    	}
+    	else if(atuacao.equalsIgnoreCase("meio ambiente")) {
+    		if(escolaridade.equalsIgnoreCase("graduacao")) {
+    			CelulaEmpresa aux = primeiro.proximo;
+    			while(aux != null) {
+    				if(aux.item.getAtuacao().equalsIgnoreCase(atuacao) && aux.item.getEscolaridade().equalsIgnoreCase(escolaridade))
+    					dados += "Empresa: " + aux.item.getNome() + "\nCargo: " + aux.item.getAtuacao() + "\nVagas: " + String.valueOf(aux.item.getVagas())  + "\nEscolaridade exigida: "
+    	    	    	        + aux.item.getEscolaridade() + "\nSalário oferecido: " + String.valueOf(aux.item.getSalario()) + "\n\n";
+    				aux = aux.proximo;
+    			}
+    		}
+
+    		else if(escolaridade.equalsIgnoreCase("pos-graduacao")) {
+    			CelulaEmpresa aux = primeiro.proximo;
+    			while(aux != null) {
+    				if(aux.item.getAtuacao().equalsIgnoreCase(atuacao) && (aux.item.getEscolaridade().equalsIgnoreCase("graduacao") || aux.item.getEscolaridade().equalsIgnoreCase("pos-graduacao")))
+    					dados += "Empresa: " + aux.item.getNome() + "\nCargo: " + aux.item.getAtuacao() + "\nVagas: " + String.valueOf(aux.item.getVagas())  + "\nEscolaridade exigida: "
+    	    	    	        + aux.item.getEscolaridade() + "\nSalário oferecido: " + String.valueOf(aux.item.getSalario()) + "\n\n";
+    				aux = aux.proximo;
+    			}
+    		}
+    		else if(escolaridade.equalsIgnoreCase("mestrado")) {
+    			CelulaEmpresa aux = primeiro.proximo;
+    			while(aux != null) {
+    				if(aux.item.getAtuacao().equalsIgnoreCase(atuacao) && !(aux.item.getEscolaridade().equalsIgnoreCase("doutorado") || aux.item.getEscolaridade().equalsIgnoreCase("pos-doutorado")))
+    					dados += "Empresa: " + aux.item.getNome() + "\nCargo: " + aux.item.getAtuacao() + "\nVagas: " + String.valueOf(aux.item.getVagas())  + "\nEscolaridade exigida: "
+    	    	    	        + aux.item.getEscolaridade() + "\nSalário oferecido: " + String.valueOf(aux.item.getSalario()) + "\n\n";
+    				aux = aux.proximo;
+    			}
+    		}
+    		else if(escolaridade.equalsIgnoreCase("doutorado")) {
+    			CelulaEmpresa aux = primeiro.proximo;
+    			while(aux != null) {
+    				if(aux.item.getAtuacao().equalsIgnoreCase(atuacao) && !aux.item.getEscolaridade().equalsIgnoreCase("pos-doutorado"))
+    					dados += "Empresa: " + aux.item.getNome() + "\nCargo: " + aux.item.getAtuacao() + "\nVagas: " + String.valueOf(aux.item.getVagas())  + "\nEscolaridade exigida: "
+    	    	    	        + aux.item.getEscolaridade() + "\nSalário oferecido: " + String.valueOf(aux.item.getSalario()) + "\n\n";
+    				aux = aux.proximo;
+    			}
+    		}
+    		else if(escolaridade.equalsIgnoreCase("pos-doutorado")) {
+    			CelulaEmpresa aux = primeiro.proximo;
+    			while(aux != null) {
+    				if(aux.item.getAtuacao().equalsIgnoreCase(atuacao))
+    					dados += "Empresa: " + aux.item.getNome() + "\nCargo: " + aux.item.getAtuacao() + "\nVagas: " + String.valueOf(aux.item.getVagas())  + "\nEscolaridade exigida: "
+    	    	    	        + aux.item.getEscolaridade() + "\nSalário oferecido: " + String.valueOf(aux.item.getSalario()) + "\n\n";
+    				aux = aux.proximo;
+    			}
+    		}
+    		else
+    			System.out.print("EScolaridade inexistente em nossos registros");
+    		return dados;
+    	}
+    	else if(atuacao.equalsIgnoreCase("saude")) {
+    		if(escolaridade.equalsIgnoreCase("graduacao")) {
+    			CelulaEmpresa aux = primeiro.proximo;
+    			while(aux != null) {
+    				if(aux.item.getAtuacao().equalsIgnoreCase(atuacao) && aux.item.getEscolaridade().equalsIgnoreCase(escolaridade))
+    					dados += "Empresa: " + aux.item.getNome() + "\nCargo: " + aux.item.getAtuacao() + "\nVagas: " + String.valueOf(aux.item.getVagas())  + "\nEscolaridade exigida: "
+    	    	    	        + aux.item.getEscolaridade() + "\nSalário oferecido: " + String.valueOf(aux.item.getSalario()) + "\n\n";
+    				aux = aux.proximo;
+    			}
+    		}
+
+    		else if(escolaridade.equalsIgnoreCase("pos-graduacao")) {
+    			CelulaEmpresa aux = primeiro.proximo;
+    			while(aux != null) {
+    				if(aux.item.getAtuacao().equalsIgnoreCase(atuacao) && (aux.item.getEscolaridade().equalsIgnoreCase("graduacao") || aux.item.getEscolaridade().equalsIgnoreCase("pos-graduacao")))
+    					dados += "Empresa: " + aux.item.getNome() + "\nCargo: " + aux.item.getAtuacao() + "\nVagas: " + String.valueOf(aux.item.getVagas())  + "\nEscolaridade exigida: "
+    	    	    	        + aux.item.getEscolaridade() + "\nSalário oferecido: " + String.valueOf(aux.item.getSalario()) + "\n\n";
+    				aux = aux.proximo;
+    			}
+    		}
+    		else if(escolaridade.equalsIgnoreCase("mestrado")) {
+    			CelulaEmpresa aux = primeiro.proximo;
+    			while(aux != null) {
+    				if(aux.item.getAtuacao().equalsIgnoreCase(atuacao) && !(aux.item.getEscolaridade().equalsIgnoreCase("doutorado") || aux.item.getEscolaridade().equalsIgnoreCase("pos-doutorado")))
+    					dados += "Empresa: " + aux.item.getNome() + "\nCargo: " + aux.item.getAtuacao() + "\nVagas: " + String.valueOf(aux.item.getVagas())  + "\nEscolaridade exigida: "
+    	    	    	        + aux.item.getEscolaridade() + "\nSalário oferecido: " + String.valueOf(aux.item.getSalario()) + "\n\n";
+    				aux = aux.proximo;
+    			}
+    		}
+    		else if(escolaridade.equalsIgnoreCase("doutorado")) {
+    			CelulaEmpresa aux = primeiro.proximo;
+    			while(aux != null) {
+    				if(aux.item.getAtuacao().equalsIgnoreCase(atuacao) && !aux.item.getEscolaridade().equalsIgnoreCase("pos-doutorado"))
+    					dados += "Empresa: " + aux.item.getNome() + "\nCargo: " + aux.item.getAtuacao() + "\nVagas: " + String.valueOf(aux.item.getVagas())  + "\nEscolaridade exigida: "
+    	    	    	        + aux.item.getEscolaridade() + "\nSalário oferecido: " + String.valueOf(aux.item.getSalario()) + "\n\n";
+    				aux = aux.proximo;
+    			}
+    		}
+    		else if(escolaridade.equalsIgnoreCase("pos-doutorado")) {
+    			CelulaEmpresa aux = primeiro.proximo;
+    			while(aux != null) {
+    				if(aux.item.getAtuacao().equalsIgnoreCase(atuacao))
+    					dados += "Empresa: " + aux.item.getNome() + "\nCargo: " + aux.item.getAtuacao() + "\nVagas: " + String.valueOf(aux.item.getVagas())  + "\nEscolaridade exigida: "
+    	    	    	        + aux.item.getEscolaridade() + "\nSalário oferecido: " + String.valueOf(aux.item.getSalario()) + "\n\n";
+    				aux = aux.proximo;
+    			}
+    		}
+    		else
+    			System.out.print("EScolaridade inexistente em nossos registros");
+    		return dados;
+    	}
+    	else if(atuacao.equalsIgnoreCase("tecnologia")) {
+    		if(escolaridade.equalsIgnoreCase("graduacao")) {
+    			CelulaEmpresa aux = primeiro.proximo;
+    			while(aux != null) {
+    				if(aux.item.getAtuacao().equalsIgnoreCase(atuacao) && aux.item.getEscolaridade().equalsIgnoreCase(escolaridade))
+    					dados += "Empresa: " + aux.item.getNome() + "\nCargo: " + aux.item.getAtuacao() + "\nVagas: " + String.valueOf(aux.item.getVagas())  + "\nEscolaridade exigida: "
+    	    	    	        + aux.item.getEscolaridade() + "\nSalário oferecido: " + String.valueOf(aux.item.getSalario()) + "\n\n";
+    				aux = aux.proximo;
+    			}
+    		}
+
+    		else if(escolaridade.equalsIgnoreCase("pos-graduacao")) {
+    			CelulaEmpresa aux = primeiro.proximo;
+    			while(aux != null) {
+    				if(aux.item.getAtuacao().equalsIgnoreCase(atuacao) && (aux.item.getEscolaridade().equalsIgnoreCase("graduacao") || aux.item.getEscolaridade().equalsIgnoreCase("pos-graduacao")))
+    					dados += "Empresa: " + aux.item.getNome() + "\nCargo: " + aux.item.getAtuacao() + "\nVagas: " + String.valueOf(aux.item.getVagas())  + "\nEscolaridade exigida: "
+    	    	    	        + aux.item.getEscolaridade() + "\nSalário oferecido: " + String.valueOf(aux.item.getSalario()) + "\n\n";
+    				aux = aux.proximo;
+    			}
+    		}
+    		else if(escolaridade.equalsIgnoreCase("mestrado")) {
+    			CelulaEmpresa aux = primeiro.proximo;
+    			while(aux != null) {
+    				if(aux.item.getAtuacao().equalsIgnoreCase(atuacao) && !(aux.item.getEscolaridade().equalsIgnoreCase("doutorado") || aux.item.getEscolaridade().equalsIgnoreCase("pos-doutorado")))
+    					dados += "Empresa: " + aux.item.getNome() + "\nCargo: " + aux.item.getAtuacao() + "\nVagas: " + String.valueOf(aux.item.getVagas())  + "\nEscolaridade exigida: "
+    	    	    	        + aux.item.getEscolaridade() + "\nSalário oferecido: " + String.valueOf(aux.item.getSalario()) + "\n\n";
+    				aux = aux.proximo;
+    			}
+    		}
+    		else if(escolaridade.equalsIgnoreCase("doutorado")) {
+    			CelulaEmpresa aux = primeiro.proximo;
+    			while(aux != null) {
+    				if(aux.item.getAtuacao().equalsIgnoreCase(atuacao) && !aux.item.getEscolaridade().equalsIgnoreCase("pos-doutorado"))
+    					dados += "Empresa: " + aux.item.getNome() + "\nCargo: " + aux.item.getAtuacao() + "\nVagas: " + String.valueOf(aux.item.getVagas())  + "\nEscolaridade exigida: "
+    	    	    	        + aux.item.getEscolaridade() + "\nSalário oferecido: " + String.valueOf(aux.item.getSalario()) + "\n\n";
+    				aux = aux.proximo;
+    			}
+    		}
+    		else if(escolaridade.equalsIgnoreCase("pos-doutorado")) {
+    			CelulaEmpresa aux = primeiro.proximo;
+    			while(aux != null) {
+    				if(aux.item.getAtuacao().equalsIgnoreCase(atuacao))
+    					dados += "Empresa: " + aux.item.getNome() + "\nCargo: " + aux.item.getAtuacao() + "\nVagas: " + String.valueOf(aux.item.getVagas())  + "\nEscolaridade exigida: "
+    	    	    	        + aux.item.getEscolaridade() + "\nSalário oferecido: " + String.valueOf(aux.item.getSalario()) + "\n\n";
+    				aux = aux.proximo;
+    			}
+    		}
+    		else
+    			System.out.print("EScolaridade inexistente em nossos registros");
+    		return dados;
+    	}
+    	else if(atuacao.equalsIgnoreCase("sociais e humanas")) {
+    		if(escolaridade.equalsIgnoreCase("graduacao")) {
+    			CelulaEmpresa aux = primeiro.proximo;
+    			while(aux != null) {
+    				if(aux.item.getAtuacao().equalsIgnoreCase(atuacao) && aux.item.getEscolaridade().equalsIgnoreCase(escolaridade))
+    					dados += "Empresa: " + aux.item.getNome() + "\nCargo: " + aux.item.getAtuacao() + "\nVagas: " + String.valueOf(aux.item.getVagas())  + "\nEscolaridade exigida: "
+    	    	    	        + aux.item.getEscolaridade() + "\nSalário oferecido: " + String.valueOf(aux.item.getSalario()) + "\n\n";
+    				aux = aux.proximo;
+    			}
+    		}
+
+    		else if(escolaridade.equalsIgnoreCase("pos-graduacao")) {
+    			CelulaEmpresa aux = primeiro.proximo;
+    			while(aux != null) {
+    				if(aux.item.getAtuacao().equalsIgnoreCase(atuacao) && (aux.item.getEscolaridade().equalsIgnoreCase("graduacao") || aux.item.getEscolaridade().equalsIgnoreCase("pos-graduacao")))
+    					dados += "Empresa: " + aux.item.getNome() + "\nCargo: " + aux.item.getAtuacao() + "\nVagas: " + String.valueOf(aux.item.getVagas())  + "\nEscolaridade exigida: "
+    	    	    	        + aux.item.getEscolaridade() + "\nSalário oferecido: " + String.valueOf(aux.item.getSalario()) + "\n\n";
+    				aux = aux.proximo;
+    			}
+    		}
+    		else if(escolaridade.equalsIgnoreCase("mestrado")) {
+    			CelulaEmpresa aux = primeiro.proximo;
+    			while(aux != null) {
+    				if(aux.item.getAtuacao().equalsIgnoreCase(atuacao) && !(aux.item.getEscolaridade().equalsIgnoreCase("doutorado") || aux.item.getEscolaridade().equalsIgnoreCase("pos-doutorado")))
+    					dados += "Empresa: " + aux.item.getNome() + "\nCargo: " + aux.item.getAtuacao() + "\nVagas: " + String.valueOf(aux.item.getVagas())  + "\nEscolaridade exigida: "
+    	    	    	        + aux.item.getEscolaridade() + "\nSalário oferecido: " + String.valueOf(aux.item.getSalario()) + "\n\n";
+    				aux = aux.proximo;
+    			}
+    		}
+    		else if(escolaridade.equalsIgnoreCase("doutorado")) {
+    			CelulaEmpresa aux = primeiro.proximo;
+    			while(aux != null) {
+    				if(aux.item.getAtuacao().equalsIgnoreCase(atuacao) && !aux.item.getEscolaridade().equalsIgnoreCase("pos-doutorado"))
+    					dados += "Empresa: " + aux.item.getNome() + "\nCargo: " + aux.item.getAtuacao() + "\nVagas: " + String.valueOf(aux.item.getVagas())  + "\nEscolaridade exigida: "
+    	    	    	        + aux.item.getEscolaridade() + "\nSalário oferecido: " + String.valueOf(aux.item.getSalario()) + "\n\n";
+    				aux = aux.proximo;
+    			}
+    		}
+    		else if(escolaridade.equalsIgnoreCase("pos-doutorado")) {
+    			CelulaEmpresa aux = primeiro.proximo;
+    			while(aux != null) {
+    				if(aux.item.getAtuacao().equalsIgnoreCase(atuacao))
+    					dados += "Empresa: " + aux.item.getNome() + "\nCargo: " + aux.item.getAtuacao() + "\nVagas: " + String.valueOf(aux.item.getVagas())  + "\nEscolaridade exigida: "
+    	    	    	        + aux.item.getEscolaridade() + "\nSalário oferecido: " + String.valueOf(aux.item.getSalario()) + "\n\n";
+    				aux = aux.proximo;
+    			}
+    		}
+    		else
+    			System.out.print("EScolaridade inexistente em nossos registros");
+    		return dados;
+    	}
+    	else
+    		return "\nÁrea de atuação não existe em nossos registros!\n";
+    	
     }
     
 }

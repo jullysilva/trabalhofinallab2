@@ -1,5 +1,5 @@
 
-44;Carlos Santos Goncalves;30;M;Pós-Graduação;Engenharia;487.0
+44;Carlos Santos Goncalves;30;M;PÃ³s-GraduaÃ§Ã£o;Engenharia;487.0
 1489;Ana Maria Braga;35;F;Mestrado;Administracao;18632.0
 3697;Joao Pedro Andrade;21;M;graduacao;tecnologia;4210.0
 9812384;jully silva andraf;19;F;graduacao;engenharia;2569.0
@@ -7,4 +7,4 @@
 987116;emely Alves da silva;19;F;graduacao;saude;3690.0
 102463;Edilene Cristina Souza;16;F;Graduacao;Saude;2584.0
 19828458;Jonas Davison;15;M;Graduacao;arte e design;1520.0
-
+9512;Katiane Souza;32;F;graduacao;engenharia;4521.0

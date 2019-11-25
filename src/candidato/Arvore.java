@@ -126,18 +126,6 @@ public class Arvore {
         this.raiz = retirar(this.raiz, id);
     }
     
-    /*public Candidato dadosArvore() {
-    	return emOrdem(raiz);
-    }
-    
-    private Candidato emOrdem(NodoCandidato raizArvore) {
-    	if(raizArvore != null) {
-    		emOrdem(raizArvore.esquerda);
-    		emOrdem(raizArvore.direita);
-    		return raizArvore.item;
-    	}
-    }*/
-    
     public  int  numCandidatos() {
     	return contarCandidatos(raiz);
     }

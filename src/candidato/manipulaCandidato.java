@@ -66,13 +66,12 @@ public class manipulaCandidato {
 			informacoes = linhaArquivo.split(";");
 			candidato = new Candidato(Integer.parseInt(informacoes[0]), informacoes[1], Integer.parseInt(informacoes[2]), informacoes[3],
 					informacoes[4], informacoes[5], Float.parseFloat(informacoes[6]));
-			
-			System.out.print("Identidade: " + candidato.getId() + "\nNome: " + candidato.getNome() + "\nIdade: " + candidato.getIdade() + "\nSexo: " + candidato.getSexo() + "\nEscolaridade: "
-				+ candidato.getEscolaridade() + "\nÁrea de atuação: " + candidato.getAtuacao() + "\nPretensão salarial: " + candidato.getPretensao() + "\n\n");
 				populaArvore(candidato);
 				populaLista(candidato);
+				
 			}
 		}
+		getLista().gestorDados();
 	}
 	
 	public void armazenaDadosArquivo(int identidade) {
@@ -97,6 +96,7 @@ public class manipulaCandidato {
 		escritorArquivo.abrirArquivo(getArquivo());
 		escritorArquivo.escrever(getLista().listarDados());
 		escritorArquivo.fecharArquivo();
+		getLista().gestorDados();
 	}
 	
 	private void populaArvore(Candidato candidato) {
