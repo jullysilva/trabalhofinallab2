@@ -7,7 +7,6 @@ import arquivo.ArquivoTextoEscrita;
 import arquivo.ArquivoTextoLeitura;
 import candidato.*;
 import Empresa.*;
-import arquivoVagas.*;
 
 public class Aplicacao {
 	public static void main(String[] args) throws Exception {
@@ -21,7 +20,6 @@ public class Aplicacao {
 		String lixo;
 		Candidato candidato;
 		Empresa empresa;
-		manipulaVagas vagas = null;
 		Scanner leitor = new Scanner(System.in);
 		ArquivoTextoLeitura leitorArquivo = new ArquivoTextoLeitura();
 		ArquivoTextoEscrita escritorArquivo = new ArquivoTextoEscrita();
@@ -517,11 +515,15 @@ public class Aplicacao {
 			case 4:
 				System.out.print("\t\t****** CANDIDATOS POR EMPRESA *******\nInforme o nome da empresa: ");
 				nomeEmpresa = leitor.nextLine();
-				if(manipuladorE.getLista().localizar(nomeEmpresa) != null)
-				 empresa = manipuladorE.getLista().localizar(nomeEmpresa);
-				System.out.print("Informe a escolaridade máxima exigidada: ");
-				String escolaridade = leitor.nextLine();
-				 manipuladorE.getLista().localizaVagas(oportunidade, escolaridade).toString());
+				if(manipuladorE.getLista().localizar(nomeEmpresa) != null) {
+					empresa = manipuladorE.getLista().localizar(nomeEmpresa);
+					String candidatos = manipuladorC.getLista().localizaVagas(empresa.getEscolaridade());
+					
+					System.out.print("\n" + candidatos);
+				}
+				else
+					System.out.print("\nEmpresa inexistente em nosso registro!\n");
+				 
 				break;
 /*-----------------------------------------------------------------------------------------------------------------------------------------------------------------*/	
 			case 5:
